@@ -37,10 +37,14 @@ data.initializeData();
 
 io.on('connection', function (socket) {
   // Send list of orders and text labels when a client connects
-  socket.emit('initialize', { orders: data.getAllOrders(),
-                          uiLabels: data.getUILabels(),
-                          ingredients: data.getIngredients() });
-
+    socket.on('pageLoaded', function(lang){
+        socket.emit('initialize', { orders: data.getAllOrders(),
+            uiLabels: data.getUILabels(lang),
+            ingredients: data.getIngredients() });
+    });
+    socket.on('kitchenpageLoaded', function(lang){
+    socket.emit('kitchenLabels', {uiLabels: data.getUILabels(lang)});
+    });
   // When someone orders something
   socket.on('order', function (order) {
     var orderIdAndName = data.addOrder(order);
@@ -49,19 +53,12 @@ io.on('connection', function (socket) {
     io.emit('currentQueue', { orders: data.getAllOrders(),
                           ingredients: data.getIngredients() });
   });
-
-  ////////////////////////////
-    // When someone add to cart something
-    socket.on('addItem', function (cartItem) {
-        // var orderIdAndName = data.addOrder(order);
-        // // send updated info to all connected clients, note the use of io instead of socket
-        // socket.emit('orderNumber', orderIdAndName);
-        io.emit('addItem2', cartItem);
-    });
-  ////////////////////////////
   // send UI labels in the chosen language
   socket.on('switchLang', function (lang) {
-    socket.emit('switchLang', data.getUILabels(lang));
+  socket.emit('switchLang', data.getUILabels(lang));
+  });
+  socket.on('kitchenSwitchLang', function (lang) {
+      socket.emit('kitchenSwitchLang', data.getUILabels(lang));
   });
   // when order is marked as done, send updated queue to all connected clients
   socket.on('orderDone', function (orderId) {

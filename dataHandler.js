@@ -65,25 +65,31 @@ Data.prototype.initializeData = function() {
 Data.prototype.getOrderNumber = function () {
   this.currentOrderNumber += 1;
   return this.currentOrderNumber;
-}
+};
 
 Data.prototype.addOrder = function (order) {
   var orderId = this.getOrderNumber();
-  this.orders[orderId] = order.order;
+  this.orders[orderId]={};
+  this.orders[orderId].items = order.order;
   this.orders[orderId].orderId = orderId;
   this.orders[orderId].status = "not-started";
+  this.orders[orderId].eatIn = order.eatIn;
   var transactions = this.data[transactionsDataName],
-    //find out the currently highest transaction id
-    transId =  transactions[transactions.length - 1].transaction_id,
-    i = order.order.ingredients,
-    k;
-  for (k = 0; k < i.length; k += 1) {
-    transId += 1;
-    transactions.push({transaction_id: transId,
-                       ingredient_id: i[k].ingredient_id,
-                       change: - 1});
-  }
-    return orderId;
+  //find out the currently highest transaction id
+  transId =  transactions[transactions.length - 1].transaction_id;
+  var i, j, k;
+  for (i in order.order) {
+      if (order.order.hasOwnProperty(i)) {
+          j = order.order[i].order.ingredients;
+          for (k = 0; k < j.length; k += 1) {
+              transId += 1;
+              transactions.push({transaction_id: transId,
+                  ingredient_id: j[k].ingredient_id,
+                  change: - 1});
+          }
+      }
+    }
+  return orderId;
 };
 
 Data.prototype.changeStock = function (item, saldo) {
