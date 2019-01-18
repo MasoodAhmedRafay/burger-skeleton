@@ -1,10 +1,18 @@
 <template>
   <div class="ingredient">
     <label>
-      <button v-on:click="decrementCounter"> -</button>
+      {{item["ingredient_"+ lang]}}
+      <br>
+      <span v-if="lang == 'en'">Price</span><span v-if="lang == 'sv'">Pris</span>:
+      {{item.selling_price}}:-
+      <br>
+      <br>
+      <button class="btn-warning btn-xs" v-on:click="decrementCounter()"> - </button>
       {{ counter }}
-      <button v-on:click="incrementCounter(item.stock)"> + </button>
-      {{item["ingredient_"+ lang]}}, {{item.selling_price}}:-
+      <button class="btn-warning btn-xs" v-on:click="incrementCounter(item.stock)" > + </button>
+      <br>
+      <br>
+      <img :src="require('../assets/'+ item.image)" width="100em" height="80em">
     </label>
   </div>
 </template>
@@ -30,7 +38,7 @@ export default {
         this.$emit('increment');
       }
       else{
-        alert("Sorry, not enough in stock :(");
+        alert(uiLabels.maxStock);
       }
     },
 
@@ -55,5 +63,5 @@ export default {
 }
 </script>
 <style scoped>
-  
+
 </style>

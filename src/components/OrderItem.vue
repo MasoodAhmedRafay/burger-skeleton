@@ -1,6 +1,11 @@
 <template>
-	<div>
-		{{orderId}} {{order.type}} {{uiLabels.ingredients}}: {{ order.ingredients.map(item=>item["ingredient_"+ lang]).join(", ") }}
+	<div class="row">
+		<div class="col-md-12">
+			<div v-for="item in order.order.ingredients">
+				{{item["ingredient_"+ lang]}}
+			</div>
+		</div>
+
 	</div>
 </template>
 <script>
@@ -10,10 +15,10 @@ export default {
     uiLabels: Object,
     order: Object,
     orderId: String,
-    lang: String
+    lang: String,
+    eatIn: Number
   }
 }
 </script>
 <style scoped>
-	
 </style>

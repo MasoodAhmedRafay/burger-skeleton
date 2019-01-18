@@ -1,16 +1,31 @@
 <template>
   <!-- Note in this component that it is using another component -->
-<div>
-  <OrderItem
-    :ui-labels="uiLabels"
-    :lang="lang"
-    :order-id="orderId"
-    :order="order">
-  </OrderItem>
-  <button v-on:click="orderDone">
-    {{uiLabels.ready}}
-  </button>
-</div>
+  <div class="col-lg-4 col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{uiLabels.orderNumber}} {{orderId}}</h5>
+        <h6 class="card-subtitle">
+          <span v-if="eatIn === 1 ">{{uiLabels.eatIn}}</span> 
+          <span v-if="eatIn === 0 ">{{uiLabels.takeAway}}</span>
+        </h6>
+        <p class="card-text">
+          <OrderItem
+            v-for="(item, key) in order"
+            :ui-labels="uiLabels"
+            :lang="lang"
+            :key="key"
+            :order-id="orderId"
+            :eat-in="eatIn"
+            :order="item" class="row align-center">
+          </OrderItem>
+        </p>
+        <div class="text-center">
+          <a href="#" class="btn btn-success" v-on:click="orderDone">{{uiLabels.ready}}</a>
+        </div>
+      </div>
+    </div>
+  </div>  
+  
 </template>
 <script>
 import OrderItem from '@/components/OrderItem.vue'
@@ -22,7 +37,8 @@ export default {
     uiLabels: Object,
     order: Object,
     orderId: String,
-    lang: String
+    lang: String,
+    eatIn: Number
   },
   methods: {
     orderDone: function () {
@@ -37,5 +53,52 @@ export default {
 }
 </script>
 <style scoped>
+  .donebutton{
+    padding-left: 6%;
+  }
+  .ingr-item{
+    padding-left:10%;
+  }
+  .card{
+      border: 1px solid rgba(0,0,0,.125);
+      margin: 5px;
+    }
+  p{
+    font-size: 12pt;
+  }
+  .btn-success {
+    color: #fff !important;
+    background-color: #337ab7 !important;
+    border-color: #337ab7 !important;
+  }
+  .btn-success,
+  .btn-success:hover {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+  }
+  /*.btn-success:active {
+    background-color: green !important;
+    border-color: none !important;
+    color: #ffffff !important;
+  }*/
+
+  .btn {
+    display: block;
+    font-weight: 400;
+    text-align: center;
+    white-space: pre-wrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
 	
 </style>

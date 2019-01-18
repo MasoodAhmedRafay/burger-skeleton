@@ -2,25 +2,29 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import io from 'socket.io-client'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     socket: io(),
-    hello: "first"
+    uiLabels:{},
+    lang: "en"
   },
   getters: {
     getSocket: state => state.socket,
-    getHello: state => state.hello
+    getLang: state => state.lang,
+    getUiLabels: state => state.uiLabels
   },
   mutations: { //manipulating data in the store
-    changeHello(state, msg) {
-      state.hello = msg;
+    setUiLabels:function(store, labels){
+      store.uiLabels = labels;
+      this.state.uiLabels = labels;
+    },
+    switchLang:function(store, lang){
+      store.lang = lang;
+      this.state.lang = lang;
     }
   },
   actions: {
-    changeHello({commit}, msg) {
-      commit('changeHello',msg)
-    }
   }
 })

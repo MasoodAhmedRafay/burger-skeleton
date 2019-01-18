@@ -6,11 +6,13 @@
 
 <script>
 import Ordering from "./views/Ordering.vue"
+import OrderingReadyMade from "./views/OrderingReadyMade.vue"
 
 export default {
   name: 'app',
   components: {
-    Ordering
+    Ordering,
+    OrderingReadyMade
   }
 }
 </script>
@@ -18,7 +20,7 @@ export default {
 <style>
 body {
   height:100vh;
-  background: radial-gradient(white, lightblue);
+  background: none;
   background-size: 200% 200%;
   animation: Gradient 20s linear infinite;
 }

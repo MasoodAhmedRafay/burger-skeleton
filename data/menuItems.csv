@@ -1,0 +1,22 @@
+ingredient_id,ingredient_sv,ingredient_en,category,milk_free,gluten_free,vegan,selling_price,image
+1,Chilli Cheese Burgare,Chilli Cheese Burger,7,1,1,1,40,setMenu1.png
+2,Crafty BBQ Bacon Burgare,Crafty BBQ Bacon Burger,7,1,1,0,40,setMenu2.png
+3,Dubbel Cheeseburger,Double CheeseBurger,7,1,1,0,40,setMenu3.png
+4,Double Steak House,Double Steak House,7,1,1,0,40,setMenu4.png
+
+5,Kyckling Tendercrisp,Chicken Tendercrisp,8,1,1,0,60,setMenu5.png
+6,Kyckling Royale,Chicken Royale,8,1,1,0,60,setMenu6.png
+
+7,Halloumi Burgare,Halloumi Burger,9,1,0,0,40,setMenu7.png
+8,Chilli Cheese Halloumi,Chilli Cheese Halloumi,9,1,0,0,40,setMenu8.png
+9,Veggie Pepper,Veggie Pepper,9,1,0,0,40,setMenu9.png
+10,Crafty Fish,Crafty Fish Royale,9,1,0,0,40,setMenu10.png
+
+5,Nachochips,Nachos,5,1,0,1,20,54.jpg
+6,Potatisstrips,Potato Fries,10,1,1,1,20,55.jpg
+7,Sötpotatisstrips,Sweet Potato Fries,10,1,1,1,30,56.jpg
+8,Läsk,Soda,11,1,1,1,20,59.jpg
+9,Jordgubbsmilkshake,Strawberry Milk Shake,11,0,1,0,40,60.jpg
+10,Chokladmilkshake,Chocolate Milk Shake,11,0,1,0,40,57.jpg
+11,Pucko,Pucko,11,0,1,0,25,58.jpg
+12,Vegansk Mango Lassi,Vegan Mango Lassi,11,1,1,1,40,61.jpg

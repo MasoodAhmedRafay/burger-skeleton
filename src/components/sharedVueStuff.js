@@ -5,38 +5,33 @@ var sharedVueStuff = {
   data: function () {
     return {
       orders: {},
-      uiLabels: {},
       ingredients: {},
-      lang: "en"
+      categories: {},
+      setMenuItems: {}
     }
   },
+
   created: function () {
+    this.$store.state.socket.emit('pageLoaded');
     this.$store.state.socket.on('initialize', function (data) {
       this.orders = data.orders;
-      this.uiLabels = data.uiLabels;
       this.ingredients = data.ingredients;
+      this.categories = data.categories;
+      this.setMenuItems = data.setMenuItems;
     }.bind(this));
-
-    this.$store.state.socket.on('switchLang', function (data) {
-      this.uiLabels = data;
-    }.bind(this));
-
     this.$store.state.socket.on('currentQueue', function (data) {
       this.orders = data.orders;
       if (typeof data.ingredients !== 'undefined') {
         this.ingredients = data.ingredients;
       }
     }.bind(this));
+
+
+  },
+  mounted() {
   },
   methods: {
-    switchLang: function () {
-      if (this.lang === "en") {
-        this.lang = "sv";
-      } else {
-        this.lang = "en";
-      }
-      this.$store.state.socket.emit('switchLang', this.lang);
-    }
+
   }
 };
 
